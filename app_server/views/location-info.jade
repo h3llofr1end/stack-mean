@@ -1,48 +1,42 @@
+include _includes/sharedHTMLfunctions
 extends layout
 block content
   .row.page-header
     .col-lg-12
-      h1 Сушия
+      h1= location.title
   .row
     .col-xs-12.col-md-9
       .row
         .col-xs-12.col-sm-6
           p.rating
-            span.glyphicon.glyphicon-star
-            span.glyphicon.glyphicon-star
-            span.glyphicon.glyphicon-star
-            span.glyphicon.glyphicon-star-empty
-            span.glyphicon.glyphicon-star-empty
-          p Невский проспект, 108
+            +outputRating(location.rating)
+          p= location.address
           .panel.panel-primary
             .panel-heading
               h2.panel-title Время работы
             .panel-body
-              p Понедельник - Пятница : 7:00 - 19:00
-              p Суббота : 8:00 - 17:00
-              p Воскресенье : закрыто
+              each time in location.openingTimes
+                p
+                  | #{time.days} :
+                  if time.closed
+                    | закрыто
+                  else
+                    | #{time.opening} - #{time.closing}
           .panel.panel-primary
             .panel-heading
               h2.panel-title Удобства
             .panel-body
-              span.label.label-warning
-                span.glyphicon.glyphicon-ok
-                | &nbsp; Горячие напитки
-              | &nbsp;
-              span.label.label-warning
-                span.glyphicon.glyphicon-ok
-                | &nbsp; Вкусные роллы
-              | &nbsp;
-              span.label.label-warning
-                span.glyphicon.glyphicon-ok
-                | &nbsp; Хороший вай-фай
-              | &nbsp;
+              each facility in location.facilities
+                span.label.label-warning
+                  span.glyphicon.glyphicon-ok
+                  | &nbsp; #{facility}
+                | &nbsp;
         .col-xs-12.col-sm-6.location-map
           .panel.panel-primary
             .panel-heading
               h2.panel-title Карта
             .panel-body
-              img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=59.9317527,30.355245&zoom=17&size=400x350&sensor=false&markers=59.9317527,30.355245&scale=2')
+              img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.lng}&zoom=17&size=400x350&sensor=false&markers=#{location.coords.lat},#{location.coords.lng}&scale=2')
       .row
         .col-xs-12
           .panel.panel-primary.review-panel
@@ -50,32 +44,16 @@ block content
               a.btn.btn-default.pull-right(href='/location/review/new') Добавить отзыв
               h2.panel-title Отзывы посетителей
             .panel-body.review-container
-              .row
-                .review
-                  .well.well-sm.review-header
-                    span.rating
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                    span.reviewAuthor Иван Иванов
-                    small.reviewTimestamp 22.07.2017
-                  .col-xs-12
-                    p Какое чудное место. Я обязательно приду сюда еще раз!
-              .row
-                .review
-                  .well.well-sm.review-header
-                    span.rating
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star-empty
-                      span.glyphicon.glyphicon-star-empty
-                    span.reviewAuthor Петр Петров
-                    small.reviewTimestamp 22.06.2017
-                  .col-xs-12
-                    p Всё было хорошо. Кофе не был хорошим, зато вай-фай шикарен.
+              each review in location.reviews
+                .row
+                  .review
+                    .well.well-sm.review-header
+                      span.rating
+                        +outputRating(review.rating)
+                      span.reviewAuthor #{review.author}
+                      small.reviewTimestamp #{review.timestamp}
+                    .col-xs-12
+                      p !{(review.reviewText).replace(/\n/g, '<br/>')}
     .col-xs-12.col-md-3
-      p.lead Сушия на Loc8r потому что это прекрасное время где можно провести время и заняться продуктивной работой.
-      p Если вы здесь были и вам понравилось, ну или нет - пожалуйста оставьте отзыв, чтобы помочь другим пользователям.
+      p.lead= sidebar.context
+      p= sidebar.callToAction
