@@ -1,0 +1,81 @@
+extends layout
+block content
+  .row.page-header
+    .col-lg-12
+      h1 Сушия
+  .row
+    .col-xs-12.col-md-9
+      .row
+        .col-xs-12.col-sm-6
+          p.rating
+            span.glyphicon.glyphicon-star
+            span.glyphicon.glyphicon-star
+            span.glyphicon.glyphicon-star
+            span.glyphicon.glyphicon-star-empty
+            span.glyphicon.glyphicon-star-empty
+          p Невский проспект, 108
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Время работы
+            .panel-body
+              p Понедельник - Пятница : 7:00 - 19:00
+              p Суббота : 8:00 - 17:00
+              p Воскресенье : закрыто
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Удобства
+            .panel-body
+              span.label.label-warning
+                span.glyphicon.glyphicon-ok
+                | &nbsp; Горячие напитки
+              | &nbsp;
+              span.label.label-warning
+                span.glyphicon.glyphicon-ok
+                | &nbsp; Вкусные роллы
+              | &nbsp;
+              span.label.label-warning
+                span.glyphicon.glyphicon-ok
+                | &nbsp; Хороший вай-фай
+              | &nbsp;
+        .col-xs-12.col-sm-6.location-map
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Карта
+            .panel-body
+              img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=59.9317527,30.355245&zoom=17&size=400x350&sensor=false&markers=59.9317527,30.355245&scale=2')
+      .row
+        .col-xs-12
+          .panel.panel-primary.review-panel
+            .panel-heading
+              a.btn.btn-default.pull-right(href='/location/review/new') Добавить отзыв
+              h2.panel-title Отзывы посетителей
+            .panel-body.review-container
+              .row
+                .review
+                  .well.well-sm.review-header
+                    span.rating
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                    span.reviewAuthor Иван Иванов
+                    small.reviewTimestamp 22.07.2017
+                  .col-xs-12
+                    p Какое чудное место. Я обязательно приду сюда еще раз!
+              .row
+                .review
+                  .well.well-sm.review-header
+                    span.rating
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star
+                      span.glyphicon.glyphicon-star-empty
+                      span.glyphicon.glyphicon-star-empty
+                    span.reviewAuthor Петр Петров
+                    small.reviewTimestamp 22.06.2017
+                  .col-xs-12
+                    p Всё было хорошо. Кофе не был хорошим, зато вай-фай шикарен.
+    .col-xs-12.col-md-3
+      p.lead Сушия на Loc8r потому что это прекрасное время где можно провести время и заняться продуктивной работой.
+      p Если вы здесь были и вам понравилось, ну или нет - пожалуйста оставьте отзыв, чтобы помочь другим пользователям.
