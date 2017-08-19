@@ -5,7 +5,9 @@ block content
       h1= pageHeader.title
   .row
     .col-xs-12.col-md-6
-      form.form-horizontal(action='/location', method='get', role='form')
+      form#addReview.form-horizontal(action='', method='post', role='form')
+        -if(error == "val")
+          .alert.alert-danger(role='alert') Все поля обязательны, попробуйте ещё раз
         .form-group
           label.col-xs-10.col-sm-2.control-label(for='name') Имя
           .col-xs-12.col-sm-10
@@ -23,5 +25,5 @@ block content
           label.col-sm-2.control-label(for='review') Отзыв
           .col-sm-10
             textarea#review.form-control(name='review', rows='5')
-      button.btn.btn-default.pull-right Добавить отзыв
+        input.btn.btn-default.pull-right(type='submit', value='Добавить отзыв')
     .col-xs-12.col-md-4

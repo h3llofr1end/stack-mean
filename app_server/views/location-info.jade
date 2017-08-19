@@ -3,7 +3,7 @@ extends layout
 block content
   .row.page-header
     .col-lg-12
-      h1= location.title
+      h1= title
   .row
     .col-xs-12.col-md-9
       .row
@@ -41,7 +41,7 @@ block content
         .col-xs-12
           .panel.panel-primary.review-panel
             .panel-heading
-              a.btn.btn-default.pull-right(href='/location/review/new') Добавить отзыв
+              a.btn.btn-default.pull-right(href='/location/#{location._id}/reviews/new') Добавить отзыв
               h2.panel-title Отзывы посетителей
             .panel-body.review-container
               each review in location.reviews
@@ -51,7 +51,8 @@ block content
                       span.rating
                         +outputRating(review.rating)
                       span.reviewAuthor #{review.author}
-                      small.reviewTimestamp #{review.timestamp}
+                      small.reviewTimestamp 
+                        +formatDate(review.createdOn)
                     .col-xs-12
                       p !{(review.reviewText).replace(/\n/g, '<br/>')}
     .col-xs-12.col-md-3
