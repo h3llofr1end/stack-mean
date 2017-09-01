@@ -3,16 +3,7 @@ var apiOptions = {
 	server: "http://localhost:3000"
 }
 
-var renderHomepage = function(req, res, responseBody) {
-	var message;
-	if(!(responseBody instanceof Array)) {
-		message = "Ошибка обращения к API";
-		responseBody = [];
-	} else {
-		if(!responseBody.length) {
-			message = "Нет мест поблизости";
-		}
-	}
+var renderHomepage = function(req, res) {
 	res.render('locations-list', {
 		title: 'Loc8r - Найдите место для работы рядом!',
 		pageHeader: {
@@ -21,9 +12,7 @@ var renderHomepage = function(req, res, responseBody) {
 		},
 		sidebar: "Ищете хорошее место для отдыха? Loc8r поможет вам найти место" 
 		+ "по душе где вы сможете удобно поработать. Возможно с кофе, пироженным или пиццей. Loc8r поможет найти " 
-		+ "вам любое место",
-		locations: responseBody,
-		message: message
+		+ "вам любое место"
 	});
 }
 
@@ -40,27 +29,7 @@ var _formatDistance = function(distance) {
 }
 
 module.exports.homelist = function(req, res) {
-	var requestOptions, path;
-	path = '/api/locations';
-	requestOptions = {
-		url: apiOptions.server + path,
-		method: 'GET',
-		json: {},
-		qs: {
-			lng: 59.9749045,
-			lat: 30.4715074
-		}
-	};
-	request(requestOptions, function(err, response, body) {
-		var i, data;
-		data = body;
-		if(response.statusCode == 200 && data.length) {
-			for(i = 0; i < data.length; i++) {
-				data[i].distance = _formatDistance(data[i].distance);
-			}
-		}
-		renderHomepage(req, res, data);
-	});
+		renderHomepage(req, res);
 };
 
 var renderDetailPage = function(req, res, locDetail) {
