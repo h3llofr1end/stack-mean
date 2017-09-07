@@ -15,7 +15,6 @@
     "morgan": "~1.0.0",
     "readline": "0.0.x",
     "request": "^2.81.0",
-    "static-favicon": "~1.0.0",
-    "uglify-js": "^3.0.28"
+    "static-favicon": "~1.0.0"
   }
 }
