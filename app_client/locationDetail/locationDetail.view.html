@@ -46,7 +46,8 @@
 				<div class="col-xs-12">
 					<div class="panel panel-primary review-panel">
 						<div class="panel-heading">
-							<a ng-click="vm.popupReviewForm()" class="btn btn-default pull-right">Добавить отзыв</a>
+							<a ng-show="vm.isLoggedIn" ng-click="vm.popupReviewForm()" class="btn btn-default pull-right">Добавить отзыв</a>
+							<a ng-hide="vm.isLoggedIn" href="/#login?page={{vm.currentPath}}" class="btn btn-default pull-right">Авторизация для добавления отзыва</a>
 							<h2 class="panel-title">Отзывы посетителей</h2>
 						</div>
 						<div class="panel-body review-container">

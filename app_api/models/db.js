@@ -40,3 +40,4 @@ var gracefulShutdown = function(msg, callback) {
 };
 
 require('./location');
+require('./users');
